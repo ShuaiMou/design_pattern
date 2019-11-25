@@ -17,7 +17,7 @@ public class MyRemoteImpl extends UnicastRemoteObject implements MyRemote{
 	
 	private static final long serialVersionUID = -2357502285202130271L;
 
-	protected MyRemoteImpl() throws RemoteException {
+	private MyRemoteImpl() throws RemoteException {
 		super();
 	}
 
@@ -34,11 +34,7 @@ public class MyRemoteImpl extends UnicastRemoteObject implements MyRemote{
 			MyRemote service = new MyRemoteImpl();
 			LocateRegistry.createRegistry(9999);
 			Naming.bind("rmi://localhost:9999/HelloRemote", service);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (AlreadyBoundException e) {
+		} catch (RemoteException | MalformedURLException | AlreadyBoundException e) {
 			e.printStackTrace();
 		}
 	}
